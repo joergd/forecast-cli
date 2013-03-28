@@ -1,0 +1,46 @@
+{
+  "name": "forecast-cli",
+  "description": "gets the weather for you from the incredible forecast api",
+  "version": "0.1.0",
+  "homepage": "https://github.com/joergd/forecast-cli",
+  "author": {
+    "name": "Joerg Diekmann",
+    "email": "joergd@pobox.com",
+    "url": "http://brea.kfa.st"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/joergd/forecast-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/joergd/forecast-cli/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/joergd/forecast-cli/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/forecast-cli",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "dependencies": {
+    "request-json": "0.3.0",
+    "geocoder": "0.1.0",
+    "colors": "0.6.0",
+    "moment": "2.0.0",
+    "commander": "1.1.1",
+    "prompt": "0.2.9"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "~0.2.0",
+    "grunt-contrib-coffee": "0.6.4",
+    "grunt": "~0.4.1"
+  },
+  "keywords": ["cli", "weather", "forecast"],
+  "preferGlobal": "true",
+  "bin": {
+    "forecast" : "./lib/forecast-cli.js"
+  }
+}
