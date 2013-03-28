@@ -18,6 +18,7 @@ program.version('0.1.0')
 program.on('--help', () ->
   console.log '  Examples:'
   console.log ''
+  console.log '    $ forecast'
   console.log '    $ forecast "Cape Town"'
   console.log '    $ forecast --hourly "Cape Town"'
   console.log ''
