@@ -20,7 +20,7 @@ Clone this project:
 CLI
 ---
 
-  Usage: forecast [options] placename
+  Usage: forecast [options] [placename]
 
   Options:
 
@@ -30,6 +30,7 @@ CLI
 
   Examples:
 
+    $ forecast
     $ forecast "Cape Town"
     $ forecast --hourly "Cape Town"
 
