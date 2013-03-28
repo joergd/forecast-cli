@@ -1,27 +1,44 @@
-# forecast-cli
+forecast-cli
+============
 
-gets the weather for you from the incredible forecast api
+forecast-cli is a node.js module and CLI tool for getting a weather forecast using [forecast.io](http://forecast.io)'s API. It uses Degrees Celsius.
 
-## Getting Started
-Install the module with: `npm install forecast-cli`
 
-```javascript
-var forecast_cli = require('forecast-cli');
-forecast_cli.awesome(); // "awesome"
-```
 
-## Documentation
-_(Coming soon)_
+Installation
+------------
 
-## Examples
-_(Coming soon)_
+With [npm](http://github.com/isaacs/npm):
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+    npm install forecast-cli
+  
+Clone this project:
 
-## Release History
-_(Nothing yet)_
+    git clone http://github.com/joergd/forecast-cli.git
 
-## License
-Copyright (c) 2013 Jörg Diekmann  
-Licensed under the MIT license.
+
+CLI
+---
+
+  Usage: forecast [options] placename
+
+  Options:
+
+    --hourly       Hourly report for the next 48 hours
+    -h, --help     output usage information
+    -V, --version  output the version number
+
+  Examples:
+
+    $ forecast "Cape Town"
+    $ forecast --hourly "Cape Town"
+
+
+How to set a default place name
+-------------------------------
+
+You can export an environment variable called FORECAST_PLACE. Place it in your bash profile.
+
+Example:
+
+    export FORECAST_PLACE="Cape Town"
