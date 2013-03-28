@@ -10,7 +10,7 @@ Installation
 
 With [npm](http://github.com/isaacs/npm):
 
-    npm install forecast-cli
+    npm install -g forecast-cli
   
 Clone this project:
 
