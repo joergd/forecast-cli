@@ -31,6 +31,7 @@ if program.args.length is 1
   defaults.savePlace program.args[0] 
   forecast.get program.args[0], program.hourly
 else
+  console.log ''
   prompt.start()
   prompt.get([{ name: 'place', description: 'Please enter a city name', default: defaults.place() }], (err, result) ->
     if err
