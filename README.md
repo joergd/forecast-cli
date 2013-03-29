@@ -35,11 +35,26 @@ CLI
     $ forecast --hourly "Cape Town"
 
 
-How to set a default place name
--------------------------------
+Default place name
+------------------
 
-You can export an environment variable called FORECAST_PLACE. Place it in your bash profile.
+Your last placename will be stored in 
 
-Example:
+    ~/.forecast-cli.json
 
-    export FORECAST_PLACE="Cape Town"
+
+White screenshot
+----------------
+
+![White Screenshot](./screenshot-white.png)
+
+
+Black screenshot
+----------------
+
+![Black Screenshot](./screenshot-black.png)
+
+
+----------------
+
+Now you're prepared.
