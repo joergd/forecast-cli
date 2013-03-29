@@ -1,7 +1,7 @@
 forecast-cli
 ============
 
-forecast-cli is a node.js module and CLI tool for getting a weather forecast using [forecast.io](http://forecast.io)'s API. It uses Degrees Celsius.
+forecast-cli is a node.js CLI tool for getting a weather forecast using [forecast.io](http://forecast.io)'s API. It uses Degrees Celsius.
 
 
 
