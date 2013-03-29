@@ -11,7 +11,8 @@ module.exports = function(grunt) {
         },
         files: {
           './lib/forecast-cli.js': './src/lib/forecast-cli.coffee',
-          './lib/forecast.js': './src/lib/forecast.coffee'
+          './lib/forecast.js': './src/lib/forecast.coffee',
+          './lib/defaults.js': './src/lib/defaults.coffee'
         }
       }
     }

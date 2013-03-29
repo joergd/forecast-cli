@@ -47,6 +47,7 @@ exports.getHourly = (location) ->
       console.log err
     if hourly = body?.hourly
       console.log ''.rpad('-', 80)
+      console.log ''
       for hour in hourly.data
         time = new moment(hour.time * 1000)
         if time.hour() > 7
@@ -58,6 +59,8 @@ exports.getHourly = (location) ->
               console.log time.format('dddd').bold
           console.log "#{time.format('ha').rpad(' ', 4).red} #{(String(parseInt(hour.temperature)) + '°').rpad(' ', 3).bold} #{addColorToSummary(hour.summary.rpad(' ', 40))} "
       console.log ''         
+      console.log 'Now you are prepared.'.grey
+      console.log ''         
   )
 
 exports.getDaily = (location) ->
@@ -66,6 +69,7 @@ exports.getDaily = (location) ->
       console.log err
     if daily = body?.daily
       console.log ''.rpad('-', 80)
+      console.log ''
       for day in daily.data
         date = new moment(day.time * 1000)
         maxTime = new moment(day.temperatureMaxTime * 1000)
@@ -73,5 +77,7 @@ exports.getDaily = (location) ->
         console.log "#{date.format('ddd').red} #{(String(parseInt(day.temperatureMax)) + '°').rpad(' ', 3).bold} #{addColorToSummary(day.summary)}"
       console.log ''         
       console.log daily.summary.bold
+      console.log ''         
+      console.log 'Now you are prepared.'.grey
       console.log ''         
   )
