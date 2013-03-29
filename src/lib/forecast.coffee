@@ -62,7 +62,7 @@ exports.getHourly = (location) ->
       hourlyDayHeading 'Today'
       for hour in hourly.data
         time = new moment(hour.time * 1000)
-        if time.hour() > 7
+        if time.hour() > 7 and time.hour() <= 22
           if time.hour() == 8
             if moment().day() isnt time.day()
               console.log ''
@@ -81,7 +81,11 @@ exports.getDaily = (location) ->
       for day in daily.data
         date = new moment(day.time * 1000)
         maxTime = new moment(day.temperatureMaxTime * 1000)
-        console.log "#{date.format('ddd').red} #{(String(parseInt(day.temperatureMax)) + '°').rpad(' ', 3).bold} #{addColorToSummary(day.summary)}"
+        if moment().dayOfYear() is date.dayOfYear()
+          console.log "    #{(String(parseInt(day.temperatureMax)) + '°').rpad(' ', 3).bold} #{addColorToSummary(day.summary)}"        
+          console.log ''
+        else
+          console.log "#{date.format('ddd').red} #{(String(parseInt(day.temperatureMax)) + '°').rpad(' ', 3).bold} #{addColorToSummary(day.summary)}"        
 
       console.log ''         
       console.log daily.summary.bold
