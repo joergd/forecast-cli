@@ -26,6 +26,8 @@ addColorToSummary = (summary) ->
       parts.push word
   return parts.join(' ')
 
+formatTemperature = (temperature) ->
+  (String(parseInt(temperature)) + '°').rpad(' ', 3).bold
 
 header = ->
   console.log ''.rpad('-', 80)
@@ -40,20 +42,8 @@ hourlyDayHeading = (day) ->
   console.log day.bold
   console.log ''
 
-exports.get = (place, hourly = false) ->
-  geocoder.geocode(place, (err, data) ->
-    location = data?.results?[0]?.geometry?.location
 
-    if location
-      if hourly
-        exports.getHourly location
-      else
-        exports.getDaily location
-    else
-      console.log "I can't find your location. Please forgive me."
-  )
-
-exports.getHourly = (location) ->
+getHourly = (location) ->
   client.get("#{location.lat},#{location.lng}?si", (err, res, body) ->
     if err
       console.log err
@@ -68,11 +58,11 @@ exports.getHourly = (location) ->
               console.log ''
               console.log ''
               hourlyDayHeading time.format('dddd')
-          console.log "#{time.format('ha').rpad(' ', 4).red} #{(String(parseInt(hour.temperature)) + '°').rpad(' ', 3).bold} #{addColorToSummary(hour.summary.rpad(' ', 40))} "
+          console.log "#{time.format('ha').rpad(' ', 4).red} #{formatTemperature(hour.temperature)} #{addColorToSummary(hour.summary)} "
       signoff()
   )
 
-exports.getDaily = (location) ->
+getDaily = (location) ->
   client.get("#{location.lat},#{location.lng}?si", (err, res, body) ->
     if err
       console.log err
@@ -82,12 +72,25 @@ exports.getDaily = (location) ->
         date = new moment(day.time * 1000)
         maxTime = new moment(day.temperatureMaxTime * 1000)
         if moment().dayOfYear() is date.dayOfYear()
-          console.log "    #{(String(parseInt(day.temperatureMax)) + '°').rpad(' ', 3).bold} #{addColorToSummary(day.summary)}"        
+          console.log "    #{formatTemperature(day.temperatureMax)} #{addColorToSummary(day.summary)}"
           console.log ''
         else
-          console.log "#{date.format('ddd').red} #{(String(parseInt(day.temperatureMax)) + '°').rpad(' ', 3).bold} #{addColorToSummary(day.summary)}"        
+          console.log "#{date.format('ddd').red} #{formatTemperature(day.temperatureMax)} #{addColorToSummary(day.summary)}"
 
       console.log ''         
       console.log daily.summary.bold
       signoff()
+  )
+
+exports.get = (place, hourly = false) ->
+  geocoder.geocode(place, (err, data) ->
+    location = data?.results?[0]?.geometry?.location
+
+    if location
+      if hourly
+        getHourly location
+      else
+        getDaily location
+    else
+      console.log "I can't find your location. Please forgive me."
   )

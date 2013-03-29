@@ -11,7 +11,6 @@ readDefaults = () ->
   try
     contents = fs.readFileSync settingsFile, 'utf8'
   catch e
-    return {}    
   JSON.parse(contents)
 
 exports.place = () ->
