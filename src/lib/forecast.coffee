@@ -47,13 +47,15 @@ exports.getHourly = (location) ->
       console.log err
     if hourly = body?.hourly
       console.log ''.rpad('-', 80)
-      console.log 'Today'.bold
       for hour in hourly.data
         time = new moment(hour.time * 1000)
         if time.hour() > 7
           if time.hour() == 8
             console.log ''
-            console.log time.format('dddd').bold
+            if moment().day() is time.day()
+              console.log 'Today'.bold
+            else
+              console.log time.format('dddd').bold
           console.log "#{time.format('ha').rpad(' ', 4).red} #{(String(parseInt(hour.temperature)) + '°').rpad(' ', 3).bold} #{addColorToSummary(hour.summary.rpad(' ', 40))} "
       console.log ''         
   )
