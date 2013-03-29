@@ -1,7 +1,6 @@
 ###
  API Docs: https://developer.darkskyapp.com/docs/v2
 ###
-
 geocoder = require('geocoder')
 colors = require('colors')
 moment = require('moment')
@@ -28,6 +27,19 @@ addColorToSummary = (summary) ->
   return parts.join(' ')
 
 
+header = ->
+  console.log ''.rpad('-', 80)
+  console.log ''
+
+signoff = ->
+  console.log ''         
+  console.log 'Now you are prepared.'.grey
+  console.log ''         
+
+hourlyDayHeading = (day) ->
+  console.log day.bold
+  console.log ''
+
 exports.get = (place, hourly = false) ->
   geocoder.geocode(place, (err, data) ->
     location = data?.results?[0]?.geometry?.location
@@ -46,21 +58,18 @@ exports.getHourly = (location) ->
     if err
       console.log err
     if hourly = body?.hourly
-      console.log ''.rpad('-', 80)
-      console.log ''
+      header()
+      hourlyDayHeading 'Today'
       for hour in hourly.data
         time = new moment(hour.time * 1000)
         if time.hour() > 7
           if time.hour() == 8
-            console.log ''
-            if moment().day() is time.day()
-              console.log 'Today'.bold
-            else
-              console.log time.format('dddd').bold
+            if moment().day() isnt time.day()
+              console.log ''
+              console.log ''
+              hourlyDayHeading time.format('dddd')
           console.log "#{time.format('ha').rpad(' ', 4).red} #{(String(parseInt(hour.temperature)) + '°').rpad(' ', 3).bold} #{addColorToSummary(hour.summary.rpad(' ', 40))} "
-      console.log ''         
-      console.log 'Now you are prepared.'.grey
-      console.log ''         
+      signoff()
   )
 
 exports.getDaily = (location) ->
@@ -68,16 +77,13 @@ exports.getDaily = (location) ->
     if err
       console.log err
     if daily = body?.daily
-      console.log ''.rpad('-', 80)
-      console.log ''
+      header()
       for day in daily.data
         date = new moment(day.time * 1000)
         maxTime = new moment(day.temperatureMaxTime * 1000)
-
         console.log "#{date.format('ddd').red} #{(String(parseInt(day.temperatureMax)) + '°').rpad(' ', 3).bold} #{addColorToSummary(day.summary)}"
+
       console.log ''         
       console.log daily.summary.bold
-      console.log ''         
-      console.log 'Now you are prepared.'.grey
-      console.log ''         
+      signoff()
   )
