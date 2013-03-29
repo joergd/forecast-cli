@@ -43,54 +43,49 @@ hourlyDayHeading = (day) ->
   console.log ''
 
 
-getHourly = (location) ->
-  client.get("#{location.lat},#{location.lng}?si", (err, res, body) ->
-    if err
-      console.log err
-    if hourly = body?.hourly
-      header()
-      hourlyDayHeading 'Today'
-      for hour in hourly.data
-        time = new moment(hour.time * 1000)
-        if time.hour() > 7 and time.hour() <= 22
-          if time.hour() == 8
-            if moment().day() isnt time.day()
-              console.log ''
-              console.log ''
-              hourlyDayHeading time.format('dddd')
-          console.log "#{time.format('ha').rpad(' ', 4).red} #{formatTemperature(hour.temperature)} #{addColorToSummary(hour.summary)} "
-      signoff()
-  )
+displayHourly = (hourly) ->
+  if hourly
+    header()
+    hourlyDayHeading 'Today'
+    for hour in hourly.data
+      time = new moment(hour.time * 1000)
+      if time.hour() > 7 and time.hour() <= 22
+        if time.hour() == 8
+          if moment().day() isnt time.day()
+            console.log ''
+            console.log ''
+            hourlyDayHeading time.format('dddd')
+        console.log "#{time.format('ha').rpad(' ', 4).red} #{formatTemperature(hour.temperature)} #{addColorToSummary(hour.summary)} "
+    signoff()
 
-getDaily = (location) ->
-  client.get("#{location.lat},#{location.lng}?si", (err, res, body) ->
-    if err
-      console.log err
-    if daily = body?.daily
-      header()
-      for day in daily.data
-        date = new moment(day.time * 1000)
-        maxTime = new moment(day.temperatureMaxTime * 1000)
-        if moment().dayOfYear() is date.dayOfYear()
-          console.log "    #{formatTemperature(day.temperatureMax)} #{addColorToSummary(day.summary)}"
-          console.log ''
-        else
-          console.log "#{date.format('ddd').red} #{formatTemperature(day.temperatureMax)} #{addColorToSummary(day.summary)}"
+displayDaily = (daily) ->
+  if daily
+    header()
+    for day in daily.data
+      date = new moment(day.time * 1000)
+      maxTime = new moment(day.temperatureMaxTime * 1000)
+      if moment().dayOfYear() is date.dayOfYear()
+        console.log "    #{formatTemperature(day.temperatureMax)} #{addColorToSummary(day.summary)}"
+        console.log ''
+      else
+        console.log "#{date.format('ddd').red} #{formatTemperature(day.temperatureMax)} #{addColorToSummary(day.summary)}"
 
-      console.log ''         
-      console.log daily.summary.bold
-      signoff()
-  )
+    console.log ''         
+    console.log daily.summary.bold
+    signoff()
 
 exports.get = (place, hourly = false) ->
   geocoder.geocode(place, (err, data) ->
-    location = data?.results?[0]?.geometry?.location
-
-    if location
-      if hourly
-        getHourly location
-      else
-        getDaily location
+    if location = data?.results?[0]?.geometry?.location
+      client.get("#{location.lat},#{location.lng}?si", (err, res, body) ->
+        if err
+          console.log err
+        else
+          if hourly
+            displayHourly body?.hourly
+          else
+            displayDaily body?.daily
+      )
     else
       console.log "I can't find your location. Please forgive me."
   )
