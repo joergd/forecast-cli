@@ -77,7 +77,7 @@ displayDaily = (daily) ->
 exports.get = (place, hourly = false) ->
   geocoder.geocode(place, (err, data) ->
     if location = data?.results?[0]?.geometry?.location
-      client.get("#{location.lat},#{location.lng}?units=si", (err, res, body) ->
+      client.get("#{location.lat},#{location.lng}?units=si&exclude=minutely,alerts", (err, res, body) ->
         if err
           console.log err
         else
