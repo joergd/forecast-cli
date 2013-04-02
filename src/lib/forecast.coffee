@@ -30,6 +30,7 @@ formatTemperature = (temperature) ->
   (String(parseInt(temperature)) + '°').rpad(' ', 3).bold
 
 header = (formattedAddress) ->
+  console.log ''
   console.log ('--- ' + formattedAddress + ' ').rpad('-', 80)
   console.log ''
 
