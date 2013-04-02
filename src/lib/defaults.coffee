@@ -7,7 +7,7 @@ else
   settingsFile = process.env['HOME'] + '/.forecast-cli.json'
 
 readDefaults = () ->
-  contents = ""
+  contents = '{}'
   try
     contents = fs.readFileSync settingsFile, 'utf8'
   catch e
