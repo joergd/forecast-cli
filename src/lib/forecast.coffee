@@ -29,8 +29,8 @@ addColorToSummary = (summary) ->
 formatTemperature = (temperature) ->
   (String(parseInt(temperature)) + '°').rpad(' ', 3).bold
 
-header = ->
-  console.log ''.rpad('-', 80)
+header = (formattedAddress) ->
+  console.log ('--- ' + formattedAddress + ' ').rpad('-', 80)
   console.log ''
 
 signoff = ->
@@ -45,7 +45,6 @@ hourlyDayHeading = (day) ->
 
 displayHourly = (hourly) ->
   if hourly
-    header()
     hourlyDayHeading 'Today'
     for hour in hourly.data
       time = new moment(hour.time * 1000)
@@ -60,7 +59,6 @@ displayHourly = (hourly) ->
 
 displayDaily = (daily) ->
   if daily
-    header()
     for day in daily.data
       date = new moment(day.time * 1000)
       maxTime = new moment(day.temperatureMaxTime * 1000)
@@ -76,11 +74,13 @@ displayDaily = (daily) ->
 
 exports.get = (place, hourly = false) ->
   geocoder.geocode(place, (err, data) ->
-    if location = data?.results?[0]?.geometry?.location
+    address = data?.results?[0]
+    if location = address?.geometry?.location
       client.get("#{location.lat},#{location.lng}?units=si&exclude=minutely,alerts", (err, res, body) ->
         if err
           console.log err
         else
+          header(address?.formatted_address)
           if hourly
             displayHourly body?.hourly
           else
