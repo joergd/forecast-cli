@@ -6,6 +6,7 @@ colors = require('colors')
 moment = require('moment')
 Client = require('request-json').JsonClient
 client = new Client('https://api.forecast.io/forecast/f5951365c265a47ef82e6f1bdd33109e/')
+defaults = require './defaults'
 
 if (typeof String::rpad != 'function')
   String::rpad = (padString, length) ->
@@ -77,7 +78,7 @@ exports.get = (place, hourly = false) ->
   geocoder.geocode(place, (err, data) ->
     address = data?.results?[0]
     if location = address?.geometry?.location
-      client.get("#{location.lat},#{location.lng}?units=si&exclude=minutely,alerts", (err, res, body) ->
+      client.get("#{location.lat},#{location.lng}?units=#{defaults.units()}&exclude=minutely,alerts", (err, res, body) ->
         if err
           console.log err
         else

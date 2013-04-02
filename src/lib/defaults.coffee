@@ -7,18 +7,28 @@ else
   settingsFile = process.env['HOME'] + '/.forecast-cli.json'
 
 readDefaults = () ->
-  contents = '{}'
+  contents = ''
   try
     contents = fs.readFileSync settingsFile, 'utf8'
   catch e
-  JSON.parse(contents)
+
+  try
+    JSON.parse(contents)
+  catch e
+    {}
 
 exports.place = () ->
   readDefaults()?.place ? ''
 
-exports.savePlace = (place) ->
-  fs.writeFile(settingsFile, JSON.stringify({ place: place }, null, 2), (err) ->
-    if err
-      console.log err
-  )
+exports.units = () ->
+  readDefaults()?.units ? 'si'
 
+exports.savePlace = (place) ->
+  defaults = readDefaults()
+  defaults.place = place
+  fs.writeFileSync(settingsFile, JSON.stringify(defaults, null, 2))
+
+exports.saveUnits = (units) ->
+  defaults = readDefaults()
+  defaults.units = units
+  fs.writeFileSync(settingsFile, JSON.stringify(defaults, null, 2))

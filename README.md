@@ -25,6 +25,7 @@ CLI
   Options:
 
     --hourly       Hourly report for the next 48 hours
+    --units        Configure to use Fahrenheit or Celcius (default)
     -h, --help     output usage information
     -V, --version  output the version number
 
@@ -33,6 +34,7 @@ CLI
     $ forecast
     $ forecast "Cape Town"
     $ forecast --hourly "Cape Town"
+    $ forecast --units
 
 
 Default place name
@@ -42,6 +44,30 @@ Your last placename will be stored in
 
     ~/.forecast-cli.json
 
+
+Default units
+-------------
+
+The default units are Celcius, and they too are stored in
+
+    ~/.forecast-cli.json
+
+The available options are
+
+    us: Fahrenheit (°F)
+    si: Celcius (°C)
+
+
+~/.forecast-cli.json
+--------------------
+
+This file holds your settings. Example:
+
+    {
+      "place": "Cape Town",
+      "units": "si"
+    }
+    
 
 White screenshot
 ----------------
