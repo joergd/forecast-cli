@@ -13,7 +13,7 @@ prompt = require 'prompt'
 defaults = require './defaults'
 forecast = require './forecast'
 
-program.version('0.2.0')
+program.version('0.3.0')
   .option('--hourly', 'Hourly report for the next 48 hours')
 
 program.on('--help', () ->
