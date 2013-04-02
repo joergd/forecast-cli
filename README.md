@@ -46,13 +46,13 @@ Your last placename will be stored in
 White screenshot
 ----------------
 
-![White Screenshot](./screenshot-white.png)
+![White Screenshot](https://raw.github.com/joergd/forecast-cli/master/screenshot-white.png)
 
 
 Black screenshot
 ----------------
 
-![Black Screenshot](./screenshot-black.png)
+![Black Screenshot](https://raw.github.com/joergd/forecast-cli/master/screenshot-black.png)
 
 
 ----------------
