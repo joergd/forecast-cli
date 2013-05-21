@@ -3,7 +3,7 @@
 ###
  forecast-cli
  https://github.com/joergd/forecast-cli
- 
+
  Copyright (c) 2013 Joerg Diekmann
  Licensed under the MIT license.
 ###
@@ -39,21 +39,25 @@ if program.units
     console.log "Thanks - units have been configured to #{units[i]}."
     process.exit()
 
-else  
+else
 
   if program.args.length is 1
-    defaults.savePlace program.args[0] 
+    defaults.savePlace program.args[0]
     forecast.get program.args[0], program.hourly
   else
     console.log ''
-    prompt.start()
-    prompt.get([{ name: 'place', description: 'Please enter a city name', default: defaults.place() }], (err, result) ->
-      if err
-        console.log err
-      else
-        if result.place.length > 0
-          defaults.savePlace result.place
-          forecast.get result.place, program.hourly
+    defaultPlace =  defaults.place()
+    if defaultPlace != ''
+      forecast.get defaultPlace, program.hourly
+    else
+      prompt.start()
+      prompt.get([{ name: 'place', description: 'Please enter a city name', default: defaultPlace }], (err, result) ->
+        if err
+          console.log err
         else
-          console.log "Ok, whatever." 
-    )
+          if result.place.length > 0
+            defaults.savePlace result.place
+            forecast.get result.place, program.hourly
+          else
+            console.log "Ok, whatever."
+      )
