@@ -23,6 +23,9 @@ addColorToSummary = (summary) ->
     if word.toLowerCase() in ['rain', 'rain,', 'rain.']
       rains = word.split /[\.,]/
       parts.push rains[0].blue
+    else if word.toLowerCase() in ['sprinkling', 'sprinkling,', 'sprinkling.']
+      rains = word.split /[\.,]/
+      parts.push rains[0].cyan
     else
       parts.push word
   return parts.join(' ')
@@ -36,9 +39,9 @@ header = (formattedAddress) ->
   console.log ''
 
 signoff = ->
-  console.log ''         
+  console.log ''
   console.log 'Now you are prepared.'.grey
-  console.log ''         
+  console.log ''
 
 hourlyDayHeading = (day) ->
   console.log day.bold
@@ -70,7 +73,7 @@ displayDaily = (daily) ->
       else
         console.log "#{date.format('ddd').red} #{formatTemperature(day.temperatureMax)} #{addColorToSummary(day.summary)}"
 
-    console.log ''         
+    console.log ''
     console.log daily.summary.bold
     signoff()
 
