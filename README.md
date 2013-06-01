@@ -1,7 +1,7 @@
 forecast-cli
 ============
 
-forecast-cli is a node.js CLI tool for getting a weather forecast using [forecast.io](http://forecast.io)'s API. It uses Degrees Celsius.
+forecast-cli is a CLI tool for getting a beautifully formatted weather forecast in your terminal, using [forecast.io]( http://forecast.io)'s API. You can configure it to use either degrees Celsius or Fahrenheit.
 
 
 
@@ -11,7 +11,7 @@ Installation
 With [npm](http://github.com/isaacs/npm):
 
     npm install -g forecast-cli
-  
+
 Clone this project:
 
     git clone http://github.com/joergd/forecast-cli.git
@@ -40,7 +40,7 @@ CLI
 Default place name
 ------------------
 
-Your last placename will be stored in 
+Your last placename will be stored in
 
     ~/.forecast-cli.json
 
@@ -67,7 +67,7 @@ This file holds your settings. Example:
       "place": "Cape Town",
       "units": "si"
     }
-    
+
 
 White screenshot
 ----------------
