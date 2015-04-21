@@ -1,7 +1,7 @@
 {
   "name": "forecast-cli",
   "description": "Gets the weather for you, and beautifully displays it in your terminal - using the forecast.io API.",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "homepage": "https://github.com/joergd/forecast-cli",
   "author": {
     "name": "Joerg Diekmann",

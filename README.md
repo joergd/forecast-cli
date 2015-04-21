@@ -69,6 +69,14 @@ This file holds your settings. Example:
     }
 
 
+When using Grunt to transpile to javascript
+-------------------------------------------
+
+Add the following line to the top of the generated forecast-cli.js file:
+
+    #!/usr/bin/env node
+
+
 White screenshot
 ----------------
 
