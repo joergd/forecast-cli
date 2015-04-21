@@ -4,7 +4,7 @@
  forecast-cli
  https://github.com/joergd/forecast-cli
 
- Copyright (c) 2013 Joerg Diekmann
+ Copyright (c) 2013-2015 Joerg Diekmann
  Licensed under the MIT license.
 ###
 

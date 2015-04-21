@@ -1,7 +1,7 @@
 {
   "name": "forecast-cli",
   "description": "Gets the weather for you, and beautifully displays it in your terminal - using the forecast.io API.",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "homepage": "https://github.com/joergd/forecast-cli",
   "author": {
     "name": "Joerg Diekmann",
@@ -26,12 +26,12 @@
     "node": ">= 0.8.0"
   },
   "dependencies": {
-    "request-json": "0.3.0",
-    "geocoder": "0.1.0",
-    "colors": "0.6.0",
-    "moment": "2.0.0",
-    "commander": "1.1.1",
-    "prompt": "0.2.9"
+    "request-json": "0.5.2",
+    "geocoder": "0.2.2",
+    "colors": "1.0.3",
+    "moment": "2.10.2",
+    "commander": "2.8.0",
+    "prompt": "0.2.14"
   },
   "devDependencies": {
     "grunt-contrib-watch": "~0.2.0",
